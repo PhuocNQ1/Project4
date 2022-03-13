@@ -1,0 +1,97 @@
+<head th:replace="layouts/layout :: head"></head>
+<div th:replace="layouts/layout :: nav"></div>
+<!--/ Intro Single star /-->
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">Our Amazing Posts</h1>
+          <span class="color-text-a">Grid News</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              News Grid
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+
+<!--/ News Grid Star /-->
+<section class="news-grid grid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4" th:each="blog : ${blogs}">
+        <div class="card-box-b card-shadow news-box" style="min-height: 350px;max-height: 350px">
+          <div class="img-box-b">
+            <img th:src="${blog.imagePath}" alt="" class="img-b img-fluid">
+          </div>
+          <div class="card-overlay">
+            <div class="card-header-b">
+              <div class="card-category-b">
+                <a href="#" class="category-b"><span th:text="${blog.category}"></span></a>
+              </div>
+              <div class="card-title-b">
+                <h2 class="title-2">
+                  <a th:href="@{/blog-single/{id}(id=${blog.id})}"><span th:text="${blog.title}"></span></a>
+                </h2>
+              </div>
+              <div class="card-date">
+                <span class="date-b" th:text="${blog.createDate}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <nav class="pagination-a">
+          <ul class="pagination justify-content-end">
+
+            <!--                        Back button-->
+            <li th:class="${1 == blogs.number + 1 }? 'page-item disabled' : 'page-item'">
+              <a class="page-link"
+                 th:href="@{/blog-grid(size=${blogs.size},page=${1})}">
+                <span class="ion-ios-arrow-back"></span>
+              </a>
+            </li>
+
+            <!--                        Page Number-->
+            <li class="page-item" th:each="item :${pageNumber}"
+                th:if="${blogs.totalPages > 1 and item<=blogs.totalPages}"
+                th:class="${item == blogs.number + 1 ? 'page-item active' :'page-item' }">
+              <a class="page-link" th:text='${item}'
+                 th:href="@{/blog-grid(size=${blogs.size},page=${item})}">
+              </a>
+            </li>
+
+            <!--                        Next Button-->
+            <li th:class="${blogs.totalPages == blogs.number + 1}? 'page-item disabled':'page-item next'">
+              <a class="page-link"
+                 th:href="@{/blog-grid(size=${blogs.size},page=${blogs.totalPages})}">
+                <span class="ion-ios-arrow-forward"></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ News Grid End /-->
+
+<section th:replace="layouts/layout :: sectionfooter"></section>
+<footer th:replace="layouts/layout :: footer"></footer>
+<div th:replace="layouts/layout :: javascript"></div>

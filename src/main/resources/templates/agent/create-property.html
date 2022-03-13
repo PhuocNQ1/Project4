@@ -1,0 +1,103 @@
+<head th:replace="layouts/layout :: head"></head>
+<div th:replace="layouts/layout :: nav"></div>
+
+
+<div class="container" id="main-content" style="margin-top: 100px">
+    <div class="row d-flex justify-content-center">
+        <form style="min-width: 300px;" action="#" th:action="@{/agent/create}" th:object="${property}" method="post" enctype="multipart/form-data">
+            <h5 class="text-center">Product form</h5>
+
+            <div class="form-group">
+                <label>Property name</label>
+                <input class="form-control" type="text" placeholder="Property name *"
+                       th:field="*{name}" th:errorclass="field-error"/>
+                <em th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></em>
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input class="form-control" type="text" placeholder="Location" th:field="*{location}" th:errorclass="field-error"/>
+                <em th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></em>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+<!--                <input class="form-control" type="text" placeholder="Status" th:field="*{status}"/>-->
+                <select  class="form-control" name="reg_role"  th:field="*{status}">
+                    <option th:text="FOR_RENT" value="FOR RENT"></option>
+                    <option th:text="FOR_SELL" value="FOR SELL"></option>
+                </select>
+                <em th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></em>
+
+            </div>
+            <div class="form-group">
+                <label>Area</label>
+                <input class="form-control" type="text" placeholder="Area" th:field="*{area}"/>
+                <em th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></em>
+
+            </div>
+            <div class="form-group">
+                <label>Beds</label>
+<!--                <input class="form-control" type="text" placeholder="Beds" th:field="*{beds}"/>-->
+                <select  class="form-control" name="reg_role"  th:field="*{beds}">
+                    <option th:each="number : ${listNumber}" th:text="${number}"
+                            th:value="${number}"></option>
+                </select>
+                <em th:if="${#fields.hasErrors('beds')}" th:errors="*{beds}"></em>
+            </div>
+            <div class="form-group">
+                <label>Baths</label>
+<!--                <input class="form-control" type="text" placeholder="Baths" th:field="*{baths}"/>-->
+                <select  class="form-control" name="reg_role"  th:field="*{baths}">
+                    <option th:each="number : ${listNumber}" th:text="${number}"
+                            th:value="${number}"></option>
+                </select>
+                <em th:if="${#fields.hasErrors('baths')}" th:errors="*{baths}"></em>
+
+            </div>
+            <div class="form-group">
+                <label>Garage</label>
+<!--                <input class="form-control" type="text" placeholder="Garage" th:field="*{garage}"/>-->
+                <select  class="form-control" name="reg_role"  th:field="*{garage}">
+                    <option th:each="number : ${listNumber}" th:text="${number}"
+                            th:value="${number}"></option>
+                </select>
+                <em th:if="${#fields.hasErrors('garage')}" th:errors="*{garage}"></em>
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                <input class="form-control" type="text" placeholder="Amount" th:field="*{amount}"/>
+                <em th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></em>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="text" placeholder="Description" th:field="*{description}"/>
+                <em th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></em>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="file" placeholder="Description" th:field="*{image}"/>
+                <em th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></em>
+            </div>
+
+            <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <span th:text="${successMessage}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+</div>
+
+<section th:replace="layouts/layout :: sectionfooter"></section>
+<footer th:replace="layouts/layout :: footer"></footer>
+<div th:replace="layouts/layout :: javascript"></div>

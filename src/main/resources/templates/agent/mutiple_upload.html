@@ -1,0 +1,91 @@
+<head th:replace="layouts/layout :: head"></head>
+<div th:replace="layouts/layout :: nav"></div>
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-6 no-padding">
+            <form class="form-inline" action="#" method="get">
+                <input class="form-control mr-sm-2" type="search" name="name" placeholder="Search by name ..."/>
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+
+        <div class="col-6 no-padding">
+            <a href="#" class="btn btn-success float-right">
+                <i class="fa fa-plus-square"></i> New contact
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive" style="overflow-x: hidden">
+        <h5>List of property</h5>
+        <!--                <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">-->
+        <!--                    <span th:text="${successMessage}"></span>-->
+        <!--                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+        <!--                        <span aria-hidden="true">&times;</span>-->
+        <!--                    </button>-->
+        <!--                </div>-->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>location</th>
+                <th>status</th>
+                <th>area</th>
+                <th>beds</th>
+                <th>baths</th>
+                <th>garage</th>
+                <th>Image</th>
+                <th>amount</th>
+                <th>createDate</th>
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <td th:text="${property.name}"></td>
+            <td th:text="${property.location}"></td>
+            <td th:text="${property.status}"></td>
+            <td><img style="width: 100px" th:src="${property.main_image}"/></td>
+            <td th:text="${property.amount}"></td>
+            <td th:text="${property.createDate}"></td>
+            <td th:text="${property.description}"></td>
+            <td th:text="${property.area}"></td>
+            <td th:text="${property.beds}"></td>
+            <td th:text="${property.baths}"></td>
+            <td th:text="${property.garage}"></td>
+            <td>
+                <button class="btn-primary">Update</button>
+            </td>
+            </tbody>
+        </table>
+    </div>
+    <h3>Upload more image</h3>
+    <form method="post" th:action="@{/agent/uploadImage}" enctype="multipart/form-data">
+        <input type="hidden" name="idProperty" th:value="${property.id}">
+        <input type="file" name="files" multiple/> <br/><br/>
+        <button type="submit">Submit</button>
+    </form>
+    <h3>List Image</h3>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="img,iterStat : ${listImage}">
+            <th scope="row" th:text="${iterStat.count}"></th>
+            <td><img style="width: 100px" th:src="${img.path}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div><!-- /.container -->
+
+<section th:replace="layouts/layout :: sectionfooter"></section>
+<footer th:replace="layouts/layout :: footer"></footer>
+<div th:replace="layouts/layout :: javascript"></div>

@@ -1,0 +1,53 @@
+<head th:replace="layouts/layout :: head"></head>
+<div th:replace="layouts/layout :: nav"></div>
+
+<div class="container" id="main-content" style="margin-top: 100px">
+    <div class="row d-flex justify-content-center">
+        <form style="min-width: 300px;" action="#" th:action="@{/agent/create-blog}" th:object="${blog}" method="post" enctype="multipart/form-data">
+            <h5 class="text-center">Blog form</h5>
+
+            <div class="form-group">
+                <label>Blog Title</label>
+                <input class="form-control" type="text" placeholder="Property name" th:field="*{title}"/>
+                <em th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></em>
+
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea  class="form-control" placeholder="Content *" th:field="*{contents}" cols="50"
+                          rows="10"></textarea>
+                <em th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}"></em>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <input class="form-control" type="text" placeholder="Status" th:field="*{category}"/>
+                <em th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></em>
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input class="form-control" type="file" placeholder="Description" th:field="*{image}"/>
+            </div>
+
+            <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show"
+                 role="alert">
+                <span th:text="${successMessage}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+
+<section th:replace="layouts/layout :: sectionfooter"></section>
+<footer th:replace="layouts/layout :: footer"></footer>
+<div th:replace="layouts/layout :: javascript"></div>

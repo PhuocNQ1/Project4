@@ -1,0 +1,80 @@
+<head th:replace="layouts/layout-register :: head-register"></head>
+<div class="main">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-img">
+                <img th:src="@{/img/form-img.jpg}" alt="">
+                <div class="signup-img-content">
+                    <h2>Register now </h2>
+                    <p>while seats are available !</p>
+                </div>
+            </div>
+            <div class="signup-form">
+                <form method="post" class="register-form" id="register-form" th:action="@{/register}"
+                      th:object="${user}" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="form-input">
+                                <label for="username" class="required">User Name</label>
+                                <input type="text" name="username" id="username" th:field="*{username}"/>
+                                <em th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></em>
+                            </div>
+                            <div class="form-input">
+                                <label for="password" class="required">Password</label>
+                                <input type="password" name="password" id="password" th:field="*{password}"/>
+                                <em th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></em>
+                            </div>
+                            <div class="form-input">
+                                <label for="phone" class="required">Full Name</label>
+                                <input type="text" name="phone" id="phone" th:field="*{name}"/>
+                                <em th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></em>
+                            </div>
+                            <div class="form-input">
+                                <label for="email" class="required">Email</label>
+                                <input type="text" name="email" id="email" th:field="*{email}"/>
+                                <em th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></em>
+                            </div>
+                            <div class="form-input">
+                                <label for="phone_number" class="required">Phone number</label>
+                                <input type="text" name="phone_number" id="phone_number" th:field="*{phone}"/>
+                                <em th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></em>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-select">
+                                <div class="label-flex">
+                                    <label for="meal_preference">Account type</label>
+                                    <a href="#" class="form-link">Account type</a>
+                                </div>
+                                <div class="select-list">
+                                    <select  name="reg_role" id="meal_preference">
+                                        <option th:each="role : ${roles}" th:text="${role.getName()}"
+                                                th:value="${role.getName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--                            //Avatar-->
+                            <div class="form-input">
+                                <label for="images">Avatar</label>
+                                <input type="file" name="image" id="images"/>
+                            </div>
+                            <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show"
+                                 role="alert">
+                                <span th:text="${successMessage}"></span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" value="Submit" class="submit" id="submit" name="submit"/>
+                        <input type="submit" value="Reset" class="submit" id="reset" name="reset"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer th:replace="layouts/layout-register ::footer-register"></footer>
